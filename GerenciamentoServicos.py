@@ -5,6 +5,7 @@ class GerenciamentoServicos:
 
     def agendar_servico(self, cliente, servico):
         
+        
         if cliente not in self.servicos_agendados:
             self.servicos_agendados[cliente] = []
         self.servicos_agendados[cliente].append(servico)
