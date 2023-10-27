@@ -1,10 +1,14 @@
 from GerenciamentoServicos import GerenciamentoServicos
 from EstoqueProdutos import EstoqueProdutos
+from GestaoMercearia import GestaoMercearia
+from MonitoramentoEnergetico import MonitoramentoEnergetico
 
 class MenuPrincipal:
     def __init__(self):
         self.gerenciamento_servicos = GerenciamentoServicos()
         self.estoque_produtos = EstoqueProdutos()
+        self.gestao_mercearia = GestaoMercearia()
+        self.monitoramento_energetico = MonitoramentoEnergetico()
         self.servicos_disponiveis = [
             "Abastecimento de gasolina",
             "Abastecimento de álcool",
@@ -123,7 +127,7 @@ class MenuPrincipal:
             elif opcao == "3":
                 self.atualizar_estoque_apos_servico()
             elif opcao == "4":
-                self.emitir_alertas()
+                self.emitir_alertas_estoque_baixo()
             elif opcao == "5":
                 self.reordenar_estoque()
             elif opcao == "6":
@@ -172,12 +176,81 @@ class MenuPrincipal:
         print("Reordenando estoque de produtos.")
 
     def menu_gestao_mercearia(self):
-        # Adicione a lógica para o módulo Gestão da Mercearia
-        pass
+        while True:
+            print("\nMenu Gestão da Mercearia:")
+            print("1. Adicionar produto à mercearia")
+            print("2. Registrar venda de produto")
+            print("3. Análise de desempenho de produto")
+            print("4. Emitir alertas de reposição")
+            print("5. Voltar ao menu principal")
+
+            opcao = input("Digite o número correspondente: ")
+
+            if opcao == "1":
+                self.adicionar_produto_mercearia()
+            elif opcao == "2":
+                self.registrar_venda_mercearia()
+            elif opcao == "3":
+                self.analisar_desempenho_produto_mercearia()
+            elif opcao == "4":
+                self.emitir_alertas_reposicao_mercearia()
+            elif opcao == "5":
+                print("Voltando ao menu principal.")
+                break
+            else:
+                print("Opção inválida. Tente novamente.")
+    
+    def adicionar_produto_mercearia(self):
+        nome = input("Digite o nome do produto: ")
+        quantidade = int(input("Digite a quantidade a ser adicionada: "))
+        detalhes = input("Digite os detalhes do produto: ")
+        self.gestao_mercearia.adicionar_produto(nome, quantidade, detalhes)
+        print(f"{quantidade} unidades de {nome} adicionadas à mercearia.")
+
+    def registrar_venda_mercearia(self):
+        nome = input("Digite o nome do produto a ser vendido: ")
+        quantidade = int(input("Digite a quantidade a ser vendida: "))
+        self.gestao_mercearia.registrar_venda(nome, quantidade)
+
+    def analisar_desempenho_produto_mercearia(self):
+        nome = input("Digite o nome do produto para análise: ")
+        self.gestao_mercearia.analisar_desempenho_produto(nome)
+
+    def emitir_alertas_reposicao_mercearia(self):
+        self.gestao_mercearia.emitir_alertas_reposicao()
+        print("Alertas de reposição emitidos.")
 
     def menu_monitoramento_energetico(self):
-        # Adicione a lógica para o módulo Monitoramento Energético
-        pass
+        monitoramento_energetico = MonitoramentoEnergetico()
+        
+        while True:
+            print("\nMenu Monitoramento Energético:")
+            print("1. Adicionar energia solar gerada")
+            print("2. Análise de desempenho da energia solar")
+            print("3. Alertas de baixa geração de energia solar")
+            print("4. Voltar ao menu principal")
+
+            opcao = input("Digite o número correspondente: ")
+
+            if opcao == "1":
+                quantidade_energia = float(input("Digite a quantidade de energia solar gerada (em kWh): "))
+                monitoramento_energetico.adicionar_energia_solar(quantidade_energia)
+                print(f"{quantidade_energia} kWh de energia solar adicionados com sucesso.")
+            elif opcao == "2":
+                desempenho = monitoramento_energetico.analisar_desempenho_energia_solar()
+                print(desempenho)
+            elif opcao == "3":
+                alertas = monitoramento_energetico.alerta_baixa_geracao_solar()
+                if alertas:
+                    for alerta in alertas:
+                        print(alerta)
+                else:
+                    print("Nenhum alerta de baixa geração de energia solar.")
+            elif opcao == "4":
+                print("Voltando ao menu principal.")
+                break
+            else:
+                print("Opção inválida. Tente novamente.")
 
     def menu_relatorio_analise(self):
         # Adicione a lógica para o módulo Relatórios e Análises
