@@ -111,21 +111,24 @@ class MenuPrincipal:
             print("3. Atualizar estoque após serviço")
             print("4. Emitir alertas de estoque baixo")
             print("5. Reordenar estoque")
-            print("6. Voltar ao menu principal")
+            print("6. Mostrar situação do estoque")  # Novo item no menu
+            print("7. Voltar ao menu principal")
 
             opcao = input("Digite o número correspondente: ")
 
             if opcao == "1":
                 self.receber_produtos()
             elif opcao == "2":
-                self.vender_produto()
+                self.vender_produtos()
             elif opcao == "3":
                 self.atualizar_estoque_apos_servico()
             elif opcao == "4":
-                self.emitir_alertas_estoque_baixo()
+                self.emitir_alertas()
             elif opcao == "5":
                 self.reordenar_estoque()
             elif opcao == "6":
+                self.estoque_produtos.mostrar_situacao_estoque()  # Chama o novo método
+            elif opcao == "7":
                 print("Voltando ao menu principal.")
                 break
             else:
@@ -133,16 +136,25 @@ class MenuPrincipal:
 
 
     def receber_produtos(self):
-        produto = input("Digite o nome do produto a ser recebido (gasolina, álcool, diesel, energia solar): ")
-        quantidade = int(input("Digite a quantidade a ser recebida: "))
-        self.estoque_produtos.receber_produtos(produto, quantidade)
-        print(f"{quantidade} unidades de {produto} recebidas com sucesso.")
+        while True:
+            produto = input("Digite o nome do produto a ser recebido (gasolina, álcool, diesel, energia solar): ").lower()
+            if produto in ["gasolina", "álcool", "diesel", "energia solar"]:
+                quantidade = int(input(f"Digite a quantidade de {produto} a ser recebida: "))
+                self.estoque_produtos.receber_produtos(produto, quantidade)
+                print(f"{quantidade} unidades de {produto} recebidas com sucesso.")
+                break
+            else:
+                print("Opção inválida. Tente novamente.")
 
-    def vender_produto(self):
-        produto = input("Digite o nome do produto a ser vendido (gasolina, álcool, diesel, energia solar): ")
-        quantidade = int(input("Digite a quantidade a ser vendida: "))
-        self.estoque_produtos.atualizar_estoque_apos_venda(produto, quantidade)
-        print(f"{quantidade} unidades de {produto} vendidas com sucesso.")
+    def vender_produtos(self):
+        while True:
+            produto = input("Digite o nome do produto a ser vendido (gasolina, álcool, diesel, energia solar): ").lower()
+            if produto in ["gasolina", "álcool", "diesel", "energia solar"]:
+                quantidade = int(input(f"Digite a quantidade de {produto} a ser vendida: "))
+                self.estoque_produtos.vender_produtos(produto, quantidade)  # Correção aqui
+                break
+            else:
+                print("Opção inválida. Tente novamente.")
 
     def atualizar_estoque_apos_servico(self):
         produto = input("Digite o nome do produto relacionado ao serviço (gasolina, álcool, diesel, energia solar): ")

@@ -35,3 +35,15 @@ class EstoqueProdutos:
             if quantidade < self.limite_minimo[produto]:
                 quantidade_faltante = self.limite_minimo[produto] - quantidade
                 self.receber_produtos(produto, quantidade_faltante)
+
+    def vender_produtos(self, produto, quantidade):
+        if produto in self.estoque and self.estoque[produto] >= quantidade:
+            self.estoque[produto] -= quantidade
+            print(f"{quantidade} unidades de {produto} vendidas com sucesso.")
+        else:
+            print(f"Não há estoque suficiente de {produto} para esta venda.")
+
+    def mostrar_situacao_estoque(self):
+        print("Situação atual do estoque:")
+        for produto, quantidade in self.estoque.items():
+            print(f"{produto}: {quantidade} unidades")
