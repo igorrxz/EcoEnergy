@@ -1,8 +1,10 @@
 from GerenciamentoServicos import GerenciamentoServicos
+from EstoqueProdutos import EstoqueProdutos
 
 class MenuPrincipal:
     def __init__(self):
         self.gerenciamento_servicos = GerenciamentoServicos()
+        self.estoque_produtos = EstoqueProdutos()
         self.servicos_disponiveis = [
             "Abastecimento de gasolina",
             "Abastecimento de álcool",
@@ -102,8 +104,60 @@ class MenuPrincipal:
             print(f"{i}. {servico}")
 
     def menu_estoque_produtos(self):
-        # Adicione a lógica para o módulo Estoque de Produtos
-        pass
+        while True:
+            print("\nMenu Estoque de Produtos:")
+            print("1. Receber produtos")
+            print("2. Vender produtos")
+            print("3. Atualizar estoque após serviço")
+            print("4. Emitir alertas de estoque baixo")
+            print("5. Reordenar estoque")
+            print("6. Voltar ao menu principal")
+
+            opcao = input("Digite o número correspondente: ")
+
+            if opcao == "1":
+                self.receber_produtos()
+            elif opcao == "2":
+                self.vender_produto()
+            elif opcao == "3":
+                self.atualizar_estoque_apos_servico()
+            elif opcao == "4":
+                self.emitir_alertas_estoque_baixo()
+            elif opcao == "5":
+                self.reordenar_estoque()
+            elif opcao == "6":
+                print("Voltando ao menu principal.")
+                break
+            else:
+                print("Opção inválida. Tente novamente.")
+
+
+    def receber_produtos(self):
+        produto = input("Digite o nome do produto a ser recebido (gasolina, álcool, diesel, energia solar): ")
+        quantidade = int(input("Digite a quantidade a ser recebida: "))
+        self.estoque_produtos.receber_produtos(produto, quantidade)
+        print(f"{quantidade} unidades de {produto} recebidas com sucesso.")
+
+    def vender_produto(self):
+        produto = input("Digite o nome do produto a ser vendido (gasolina, álcool, diesel, energia solar): ")
+        quantidade = int(input("Digite a quantidade a ser vendida: "))
+        self.estoque_produtos.atualizar_estoque_apos_venda(produto, quantidade)
+        print(f"{quantidade} unidades de {produto} vendidas com sucesso.")
+
+    def atualizar_estoque_apos_servico(self):
+        produto = input("Digite o nome do produto relacionado ao serviço (gasolina, álcool, diesel, energia solar): ")
+        quantidade = int(input("Digite a quantidade usada no serviço: "))
+        self.estoque_produtos.atualizar_estoque_apos_venda(produto, quantidade)
+        print(f"Estoque atualizado após serviço de {produto}.")
+
+    def emitir_alertas_estoque_baixo(self):
+        alertas = self.estoque_produtos.emitir_alertas_estoque_baixo()
+        for alerta in alertas:
+            print(alerta)
+
+    def reordenar_estoque(self):
+        self.estoque_produtos.reordenar_estoque()
+        print("Reordenando estoque de produtos.")
 
     def menu_gestao_mercearia(self):
         # Adicione a lógica para o módulo Gestão da Mercearia
@@ -120,3 +174,6 @@ class MenuPrincipal:
 if __name__ == "__main__":
     menu_principal = MenuPrincipal()
     menu_principal.exibir_menu()
+
+
+
