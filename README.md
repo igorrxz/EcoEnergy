@@ -1,3 +1,10 @@
+Equipe:
+
+Ailton Rodrigues
+Eduardo Aguiar
+Igor Ximenes
+Yuri Ernani
+
 Visão Geral do Projeto EcoEnergy
 
 O projeto EcoEnergy é uma aplicação em Python que engloba a gestão de uma empresa atuando nos setores de serviços automotivos, vendas de produtos e geração de energia solar. O sistema oferece funcionalidades para gerenciar serviços, estoque de produtos, mercearia, monitoramento de energia e geração de relatórios de análise.
