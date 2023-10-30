@@ -1,8 +1,11 @@
 Equipe:
 
 Ailton Rodrigues
+
 Eduardo Aguiar
+
 Igor Ximenes
+
 Yuri Ernani
 
 Visão Geral do Projeto EcoEnergy
